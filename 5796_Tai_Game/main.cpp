@@ -1,8 +1,10 @@
 #include "parentFunction.h"
 #include "Entity.h"
+#include "map.h"
 #include <iostream>
 
 Entity myBackground;
+Map myGameMap;
 bool initData()
 {
 	bool success = true;
@@ -87,6 +89,11 @@ int main(int argc, char **argv)
 	{
 		return -1;
 	}
+
+	myGameMap.loadMyMap("assets/myMap/myMapSet.dat");
+	myGameMap.loadMyMapTiles(screen);
+
+
 	while (!isQuit)
 	{
 		while (SDL_PollEvent(&_event) != 0)
@@ -98,6 +105,7 @@ int main(int argc, char **argv)
 		}
 		SDL_RenderClear(screen);
 		myBackground.render(screen, NULL);
+		myGameMap.drawMyMap(screen);//render map to screen
 		SDL_RenderPresent(screen);
 	}
 	close();
