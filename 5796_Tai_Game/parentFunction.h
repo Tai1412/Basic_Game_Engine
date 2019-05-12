@@ -36,4 +36,10 @@ typedef struct myMap
 	char* fileName;
 	int tile[maxMapX][maxMapY];//400*10=4000
 } myMap;//object
+
+typedef struct myInput
+{
+	int moveLeft;
+	int moveRight;
+};
 #endif

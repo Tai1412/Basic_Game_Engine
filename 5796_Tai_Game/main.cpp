@@ -1,10 +1,12 @@
 #include "parentFunction.h"
 #include "Entity.h"
 #include "map.h"
+#include "playerObject.h"
 #include <iostream>
 
 Entity myBackground;
 Map myGameMap;
+playerObject player;
 bool initData()
 {
 	bool success = true;
@@ -93,6 +95,8 @@ int main(int argc, char **argv)
 	myGameMap.loadMyMap("assets/myMap/myMapSet.dat");
 	myGameMap.loadMyMapTiles(screen);
 
+	player.loadImage("assets//player//playerMoveRight.png", screen);//load image
+	player.setClip();
 
 	while (!isQuit)
 	{
@@ -102,10 +106,12 @@ int main(int argc, char **argv)
 			{
 				isQuit = true;
 			}
+			player.handleInputEvent(_event, screen);
 		}
 		SDL_RenderClear(screen);
 		myBackground.render(screen, NULL);
 		myGameMap.drawMyMap(screen);//render map to screen
+		player.draw(screen);
 		SDL_RenderPresent(screen);
 	}
 	close();
