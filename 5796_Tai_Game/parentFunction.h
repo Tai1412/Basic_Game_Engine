@@ -25,6 +25,7 @@ const int screenHeight = 640;//full heigth
 #define maxMapX 400 //set max map x =400
 #define maxMapY 10 //max map y=10
 #define maxTiles 20
+#define emptyTile 0
 //struct
 typedef struct myMap
 {
@@ -34,7 +35,7 @@ typedef struct myMap
 	int maxX;
 	int maxY;
 	char* fileName;
-	int tile[maxMapX][maxMapY];//400*10=4000
+	int tile[maxMapY][maxMapX];//400*10=4000
 } myMap;//object
 
 typedef struct myInput

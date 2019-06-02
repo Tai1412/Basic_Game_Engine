@@ -1,6 +1,9 @@
 #pragma once
 #ifndef PLAYER_OBJECT_H_
 #define PLAYER_OBJECT_H_
+#define FALL_SPEED 1
+#define MAXIMUM_F_SPEED 10
+#define CHARACTER_SPEED 8
 #include "parentFunction.h"
 #include "Entity.h"
 class playerObject:
@@ -20,6 +23,17 @@ public:
 	};
 	void setClip();
 
+	//calculate move of player
+	void calMovePlayer(myMap& mapData);
+	//check character stand on tile
+	void checkPlayer(myMap& mapData);
+	//set Map
+	void setMyMapXY(const int x, const int y)
+	{
+		mapX = x;
+		mapY = y;
+	}
+	void entityOnMap(myMap& mapData);
 private:
 	//declare variable
 	float valueX;
@@ -31,8 +45,10 @@ private:
 	SDL_Rect clipFrame[8];
 	myInput typeInput;
 	int frame;
+	bool standGround;
 	int moveStatus;
-
+	int mapX;
+	int mapY;
 };
 
 #endif

@@ -38,7 +38,7 @@ void Map::loadMyMap(char* mapName)
 }
 void Map::loadMyMapTiles(SDL_Renderer* screen)
 {
-	char fileImage[30];
+	char fileImage[40];
 	FILE *file = NULL;
 
 	for (int i = 0; i < maxTiles; i++)

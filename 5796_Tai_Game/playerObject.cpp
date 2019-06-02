@@ -12,6 +12,11 @@ playerObject::playerObject()
 	frameWidth = 0;
 	frameHeight = 0;
 	moveStatus = -1;//dont know right or left yet
+	typeInput.moveLeft = 0;
+	typeInput.moveRight = 0;
+	standGround = false;
+	mapX = 0;
+	mapY = 0;
 }
 
 
@@ -31,7 +36,7 @@ bool playerObject::loadImage(std::string path, SDL_Renderer* screen)
 }
 void playerObject::setClip()
 {
-	if (frameWidth > 0 & frameHeight > 0)
+	if (frameWidth > 0 && frameHeight > 0)
 	{
 		clipFrame[0].x = 0;
 		clipFrame[0].y = 0;
@@ -96,8 +101,8 @@ void playerObject::draw(SDL_Renderer* des)
 	{
 		frame = 0;
 	}
-	rect.x = positionX;
-	rect.y = positionY;
+	rect.x = positionX - mapX;
+	rect.y = positionY - mapY;
 	SDL_Rect* thisClip = &clipFrame[frame];
 	SDL_Rect rect_ =
 	{
@@ -119,12 +124,14 @@ void playerObject::handleInputEvent(SDL_Event events, SDL_Renderer* screen)
 		{
 			moveStatus = moveToRight;
 			typeInput.moveRight = 1;
+			typeInput.moveLeft = 0;
 		}
 		break;
 		case SDLK_LEFT:
 		{
 			moveStatus = moveToLeft;
 			typeInput.moveLeft = 1;
+			typeInput.moveRight = 0;
 		}
 		break;
 		}
@@ -144,5 +151,113 @@ void playerObject::handleInputEvent(SDL_Event events, SDL_Renderer* screen)
 		}
 		break;
 		}
+	}
+}
+void playerObject::calMovePlayer(myMap& mapData)
+{
+	valueX = 0;
+	valueY += 1;//speed fall down of character to the tile
+	if (valueY >= MAXIMUM_F_SPEED)
+	{
+		valueY = MAXIMUM_F_SPEED;
+	}
+	if (typeInput.moveLeft == 1)
+	{
+		valueX -= CHARACTER_SPEED; //move left x
+	}
+	else if (typeInput.moveRight == 1)
+	{
+		valueX += CHARACTER_SPEED;
+	}
+	checkPlayer(mapData);
+	entityOnMap(mapData);//entity on the map center
+}
+void playerObject::entityOnMap(myMap& mapData)
+{
+	mapData.startX = positionX - (screenWidth / 2);
+	if (mapData.startX < 0)
+	{
+		mapData.startX = 0;
+	}
+	else if (mapData.startX + screenWidth >= mapData.maxX)
+	{
+		mapData.startX = mapData.maxX - screenWidth;
+	}
+	mapData.startY = positionY - (screenHeight / 2);
+	if (mapData.startY < 0)
+	{
+		mapData.startY = 0;
+	}
+	else if (mapData.startY + screenHeight >= mapData.maxY)
+	{
+		mapData.startY = mapData.maxY - screenHeight;
+	}
+}
+void playerObject::checkPlayer(myMap& mapData)
+{
+	int x1,x2 = 0;
+	int y1, y2 = 0;
+	int minHeight = frameHeight < tileSize ? frameHeight : tileSize;
+	x1 = (positionX + valueX) / tileSize;//get current tileMat
+	x2 = (positionX + valueX + frameWidth - 1) / tileSize;
+	y1 = (positionY) / tileSize;
+	y2 = (positionY + minHeight - 1) / tileSize;
+	//check move
+	if (x1 >= 0 && x2 < maxMapX && y1 >= 0 && y2 < maxMapY)
+	{
+		if (valueX > 0)//player moving to right
+		{
+			if (mapData.tile[y1][x2] != emptyTile || mapData.tile[y2][x2] != emptyTile)
+			{
+				positionX = tileSize * x2;
+				positionX -= frameWidth + 1;
+				valueX = 0;//continue move but cant
+			}
+			else if (valueX < 0)
+			{
+				if (mapData.tile[y1][x1] != emptyTile || mapData.tile[y2][x1] != emptyTile)
+				{
+					positionX = tileSize*(x1 + 1);
+					valueX = 0;
+				}
+			}
+		}
+	}
+
+	int minWidth = frameWidth < tileSize ? frameWidth : tileSize;
+	x1 = (positionX) / tileSize;
+	x2 = (positionX + minWidth) / tileSize;
+	y1 = (positionY + valueY) / tileSize;
+	y2 = (positionY + valueY + frameHeight - 1) / tileSize;
+	if (x1 >= 0 && x2 < maxMapY && y1 >= 0 && y2 < maxMapY)
+	{
+		if (valueY > 0)
+		{
+			if (mapData.tile[y2][x1] != emptyTile || mapData.tile[y2][x2] != emptyTile)
+			{
+				positionY = tileSize * y2;
+				positionY -= (frameHeight + 1);
+				valueY = 0;
+				standGround = true;
+			}
+		}
+		else if (valueY < 0)
+		{
+			if (mapData.tile[y1][x1] != emptyTile || mapData.tile[y1][x2] != emptyTile)
+			{
+				positionY = (y1 + 1)*tileSize;
+				valueY = 0;
+			}
+		}
+	}
+	positionX += valueX;
+	positionY += valueY;
+	if (positionX < 0)
+	{
+		positionX = 0;
+	}
+	else if (positionX + frameWidth > mapData.maxX)
+	{
+		positionX = mapData.maxX = frameWidth - 1;
 	}
 }

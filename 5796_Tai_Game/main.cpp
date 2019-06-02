@@ -110,8 +110,13 @@ int main(int argc, char **argv)
 		}
 		SDL_RenderClear(screen);
 		myBackground.render(screen, NULL);
-		myGameMap.drawMyMap(screen);//render map to screen
+		//myGameMap.drawMyMap(screen);//render map to screen
+		myMap mapData = myGameMap.getMyMap();
+		player.setMyMapXY(mapData.startX, mapData.startY);
+		player.calMovePlayer(mapData);
 		player.draw(screen);
+		myGameMap.setMyMap(mapData);
+		myGameMap.drawMyMap(screen);
 		SDL_RenderPresent(screen);
 	}
 	close();
