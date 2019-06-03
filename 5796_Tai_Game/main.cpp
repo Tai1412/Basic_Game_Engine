@@ -2,11 +2,13 @@
 #include "Entity.h"
 #include "map.h"
 #include "playerObject.h"
+#include "timerFps.h"
 #include <iostream>
 
 Entity myBackground;
 Map myGameMap;
 playerObject player;
+timerFps fps;
 bool initData()
 {
 	bool success = true;
@@ -100,6 +102,7 @@ int main(int argc, char **argv)
 
 	while (!isQuit)
 	{
+		fps.startRun();
 		while (SDL_PollEvent(&_event) != 0)
 		{
 			if (_event.type == SDL_QUIT)
@@ -118,6 +121,20 @@ int main(int argc, char **argv)
 		myGameMap.setMyMap(mapData);
 		myGameMap.drawMyMap(screen);
 		SDL_RenderPresent(screen);
+
+		int realTime = fps.getTick();
+		int timeForFrame = 1000 / framePerSecond;//1000ms time for one frame
+		//the fps small, game will be slowly
+		//the fps large, game will be faster
+		if (realTime < timeForFrame)//latency
+		{
+			int delayTime = timeForFrame - realTime;
+			if (delayTime>=0)
+			{ 
+				SDL_Delay(delayTime);
+			}
+			
+		}
 	}
 	close();
 	system("pause");

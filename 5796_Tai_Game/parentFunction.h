@@ -19,6 +19,7 @@ static SDL_Event _event;
 //screen size
 const int screenWidth = 1280;//full width
 const int screenHeight = 640;//full heigth 
+const int framePerSecond = 24;//fps=24/s
 
 //define 
 #define tileSize 64 //height of the screen 64x10=640

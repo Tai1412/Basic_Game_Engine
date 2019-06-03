@@ -86,12 +86,14 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="map.cpp" />
     <ClCompile Include="playerObject.cpp" />
+    <ClCompile Include="timerFps.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="parentFunction.h" />
     <ClInclude Include="playerObject.h" />
+    <ClInclude Include="timerFps.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
