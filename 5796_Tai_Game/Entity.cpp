@@ -17,6 +17,7 @@ Entity::~Entity()
 }
 bool Entity::loadImage(std::string path, SDL_Renderer* screen)
 {
+    free();//improve fast.
 	SDL_Texture* newTexture = NULL;
 	//return surface
 	SDL_Surface* loadSurface = IMG_Load(path.c_str());

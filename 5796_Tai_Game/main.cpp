@@ -26,7 +26,7 @@ bool initData()
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1");
 
 	//create window, params are: window title, window pos x, pos y, width, height, window flags
-	window = SDL_CreateWindow("5796_Tai_Game", SDL_WINDOWPOS_CENTERED,
+	window = SDL_CreateWindow("Test", SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED, screenWidth, screenHeight, SDL_WINDOW_SHOWN);/*| SDL_WINDOW_FULLSCREEN*/
 	if (window == NULL){
 		success = false;

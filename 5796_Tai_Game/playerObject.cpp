@@ -11,11 +11,12 @@ playerObject::playerObject()
 	valueY = 0;
 	frameWidth = 0;
 	frameHeight = 0;
-	moveStatus = -1;//dont know right or left yet
+	moveStatus = noneMove;//set initial noneMove
 	typeInput.moveLeft = 0;
 	typeInput.moveRight = 0;
 	typeInput.jump = 0;
 	standGround = false;
+	timeBack = 0;
 	mapX = 0;
 	mapY = 0;
 }
@@ -82,17 +83,7 @@ void playerObject::setClip()
 }
 void playerObject::draw(SDL_Renderer* des)
 {
-	if (standGround == true)
-	{
-		if (moveStatus == moveToLeft)
-		{
-			loadImage("assets//player//playerMoveLeft.png", des);
-		}
-		else
-		{
-			loadImage("assets//player//playerMoveRight.png", des);
-		}
-	}
+    updatePlayerImage(des);
 	if (typeInput.moveLeft == 1 || typeInput.moveRight == 1)
 	{
 		frame++;
@@ -105,17 +96,21 @@ void playerObject::draw(SDL_Renderer* des)
 	{
 		frame = 0;
 	}
-	rect.x = positionX - mapX;
-	rect.y = positionY - mapY;
-	SDL_Rect* thisClip = &clipFrame[frame];
-	SDL_Rect rect_ =
+	if (timeBack == 0)
 	{
-		rect.x,
-		rect.y,
-		frameWidth,
-		frameHeight
-	};
-	SDL_RenderCopy(des, object, thisClip, &rect_);
+		rect.x = positionX - mapX;
+		rect.y = positionY - mapY;
+		SDL_Rect* thisClip = &clipFrame[frame];
+		SDL_Rect rect_ =
+		{
+			rect.x,
+			rect.y,
+			frameWidth,
+			frameHeight
+		};
+		SDL_RenderCopy(des, object, thisClip, &rect_);
+	}
+	
 }
 //event proccesss
 void playerObject::handleInputEvent(SDL_Event events, SDL_Renderer* screen)
@@ -129,14 +124,7 @@ void playerObject::handleInputEvent(SDL_Event events, SDL_Renderer* screen)
 			moveStatus = moveToRight;
 			typeInput.moveRight = 1;
 			typeInput.moveLeft = 0;
-			if (standGround == true)//if stand on ground load player move
-			{
-				loadImage("assets//player//playerMoveRight.png", screen);
-			}
-			else//on sky load jump
-			{
-				loadImage("assets//player//playerJumpRight.png", screen);
-			}
+            updatePlayerImage(screen);
 		}
 		break;
 		case SDLK_LEFT:
@@ -144,14 +132,7 @@ void playerObject::handleInputEvent(SDL_Event events, SDL_Renderer* screen)
 			moveStatus = moveToLeft;
 			typeInput.moveLeft = 1;
 			typeInput.moveRight = 0;
-			if (standGround == true)//if stand on ground load player move
-			{
-				loadImage("assets//player//playerMoveLeft.png", screen);
-			}
-			else//on sky load jump
-			{
-				loadImage("assets//player//playerJumpLeft.png", screen);
-			}
+            updatePlayerImage(screen);
 		}
 		break;
 		}
@@ -183,31 +164,58 @@ void playerObject::handleInputEvent(SDL_Event events, SDL_Renderer* screen)
 }
 void playerObject::calMovePlayer(myMap& mapData)
 {
-	valueX = 0;
-	valueY += 1;//speed fall down of character to the tile
-	if (valueY >= MAXIMUM_F_SPEED)
+    //when the time back == 0 , character respawn
+	if (timeBack == 0)
 	{
-		valueY = MAXIMUM_F_SPEED;
-	}
-	if (typeInput.moveLeft == 1)
-	{
-		valueX -= CHARACTER_SPEED; //move left x
-	}
-	else if (typeInput.moveRight == 1)
-	{
-		valueX += CHARACTER_SPEED;
-	}
-	if (typeInput.jump == 1)
-	{
-		if (standGround == true)
+		valueX = 0;
+		valueY += 1;//speed fall down of character to the tile
+		if (valueY >= MAXIMUM_F_SPEED)
 		{
-			valueY = - CHARACTER_JUMMP;//in case of character on ground , they can jump, otherwise they can't
+			valueY = MAXIMUM_F_SPEED;
 		}
-		typeInput.jump = 0;
-		standGround = false;
+		if (typeInput.moveLeft == 1)
+		{
+			valueX -= CHARACTER_SPEED; //move left x
+		}
+		else if (typeInput.moveRight == 1)
+		{
+			valueX += CHARACTER_SPEED;
+		}
+		if (typeInput.jump == 1)
+		{
+			if (standGround == true)
+			{
+				valueY = -CHARACTER_JUMMP;//in case of character on ground , they can jump, otherwise they can't
+			}
+			typeInput.jump = 0;
+			standGround = false;
+		}
+		checkPlayer(mapData);
+		entityOnMap(mapData);//entity on the map center
 	}
-	checkPlayer(mapData);
-	entityOnMap(mapData);//entity on the map center
+
+     //check time back>0 ,minus iit until ==0 and minus position of character standing on the ground
+	if (timeBack > 0)
+	{
+		timeBack--;
+		if (timeBack == 0)//reset 
+		{
+            standGround = false;
+			if (positionX > 320)//5 tile matt, 1 tilematt =64px
+			{
+				positionX -= 320;
+			}
+			else{
+				positionX = 0;
+			}
+
+			positionY = 0;
+			valueX = 0;
+			valueY = 0;
+		}
+	}
+	
+	
 }
 void playerObject::entityOnMap(myMap& mapData)
 {
@@ -230,6 +238,30 @@ void playerObject::entityOnMap(myMap& mapData)
 		mapData.startY = mapData.maxY - screenHeight;
 	}
 }
+void playerObject::updatePlayerImage(SDL_Renderer* des)
+{
+    if (standGround == true)
+    {
+        if (moveStatus == moveToLeft)
+        {
+            loadImage("assets//player//playerMoveLeft.png", des);
+        }
+        else
+        {
+            loadImage("assets//player//playerMoveRight.png", des);
+        }
+    }
+    else{
+        if (moveStatus == moveToLeft)
+        {
+            loadImage("assets//player//playerJumpLeft.png",des);
+        }
+        else
+        {
+            loadImage("assets//player//playerJumpRight.png", des);
+        }
+    }
+}
 void playerObject::checkPlayer(myMap& mapData)
 {
 	int x1,x2 = 0;
@@ -250,15 +282,15 @@ void playerObject::checkPlayer(myMap& mapData)
 				positionX -= frameWidth + 1;
 				valueX = 0;//continue move but cant
 			}
-			else if (valueX < 0)
-			{
-				if (mapData.tile[y1][x1] != emptyTile || mapData.tile[y2][x1] != emptyTile)
-				{
-					positionX = tileSize*(x1 + 1);
-					valueX = 0;
-				}
-			}
 		}
+        else if (valueX < 0)
+        {
+            if (mapData.tile[y1][x1] != emptyTile || mapData.tile[y2][x1] != emptyTile)
+            {
+                positionX = tileSize*(x1 + 1);
+                valueX = 0;
+            }
+        }
 	}
 
 	int minWidth = frameWidth < tileSize ? frameWidth : tileSize;
@@ -266,7 +298,7 @@ void playerObject::checkPlayer(myMap& mapData)
 	x2 = (positionX + minWidth) / tileSize;
 	y1 = (positionY + valueY) / tileSize;
 	y2 = (positionY + valueY + frameHeight - 1) / tileSize;
-	if (x1 >= 0 && x2 < maxMapY && y1 >= 0 && y2 < maxMapY)
+    if (x1 >= 0 && x2 < maxMapX && y1 >= 0 && y2 < maxMapY)
 	{
 		if (valueY > 0)
 		{
@@ -275,7 +307,11 @@ void playerObject::checkPlayer(myMap& mapData)
 				positionY = tileSize * y2;
 				positionY -= (frameHeight + 1);
 				valueY = 0;
-				standGround = true;
+                standGround = true;
+                if (moveStatus == noneMove)
+                {
+                    moveStatus = moveToRight;
+                }
 			}
 		}
 		else if (valueY < 0)
@@ -296,5 +332,10 @@ void playerObject::checkPlayer(myMap& mapData)
 	else if (positionX + frameWidth > mapData.maxX)
 	{
 		positionX = mapData.maxX = frameWidth - 1;
+	}
+
+	if (positionY>mapData.maxY)
+	{
+		timeBack = 60;//delay 60;
 	}
 }

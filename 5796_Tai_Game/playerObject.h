@@ -19,8 +19,9 @@ public:
 	void handleInputEvent(SDL_Event events, SDL_Renderer* screen);//handle event
 	enum typeMove
 	{
-		moveToRight = 0,
-		moveToLeft = 1
+        noneMove = 0,
+		moveToRight = 1,
+		moveToLeft = 2
 	};
 	void setClip();
 
@@ -34,6 +35,7 @@ public:
 		mapX = x;
 		mapY = y;
 	}
+    void updatePlayerImage(SDL_Renderer* des);
 	void entityOnMap(myMap& mapData);
 private:
 	//declare variable
@@ -48,6 +50,7 @@ private:
 	int frame;
 	bool standGround;
 	int moveStatus;
+	int timeBack;
 	int mapX;
 	int mapY;
 };
