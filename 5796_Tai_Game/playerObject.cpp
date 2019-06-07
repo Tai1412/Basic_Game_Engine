@@ -14,6 +14,7 @@ playerObject::playerObject()
 	moveStatus = -1;//dont know right or left yet
 	typeInput.moveLeft = 0;
 	typeInput.moveRight = 0;
+	typeInput.jump = 0;
 	standGround = false;
 	mapX = 0;
 	mapY = 0;
@@ -152,6 +153,14 @@ void playerObject::handleInputEvent(SDL_Event events, SDL_Renderer* screen)
 		break;
 		}
 	}
+	//jump for character
+	if (events.type == SDL_MOUSEBUTTONDOWN)
+	{
+		if (events.button.button == SDL_BUTTON_RIGHT)
+		{
+			typeInput.jump = 1;
+		}
+	}
 }
 void playerObject::calMovePlayer(myMap& mapData)
 {
@@ -168,6 +177,15 @@ void playerObject::calMovePlayer(myMap& mapData)
 	else if (typeInput.moveRight == 1)
 	{
 		valueX += CHARACTER_SPEED;
+	}
+	if (typeInput.jump == 1)
+	{
+		if (standGround == true)
+		{
+			valueY = - CHARACTER_JUMMP;//in case of character on ground , they can jump, otherwise they can't
+		}
+		typeInput.jump = 0;
+		standGround = false;
 	}
 	checkPlayer(mapData);
 	entityOnMap(mapData);//entity on the map center

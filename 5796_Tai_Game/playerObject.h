@@ -4,6 +4,7 @@
 #define FALL_SPEED 1
 #define MAXIMUM_F_SPEED 10
 #define CHARACTER_SPEED 8
+#define CHARACTER_JUMMP 20
 #include "parentFunction.h"
 #include "Entity.h"
 class playerObject:

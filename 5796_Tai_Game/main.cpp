@@ -111,6 +111,7 @@ int main(int argc, char **argv)
 			}
 			player.handleInputEvent(_event, screen);
 		}
+		SDL_SetRenderDrawColor(screen, 167, 167, 167, 167);
 		SDL_RenderClear(screen);
 		myBackground.render(screen, NULL);
 		//myGameMap.drawMyMap(screen);//render map to screen

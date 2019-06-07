@@ -43,5 +43,6 @@ typedef struct myInput
 {
 	int moveLeft;
 	int moveRight;
-};
+	int jump;
+} myInput;
 #endif
