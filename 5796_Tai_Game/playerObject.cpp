@@ -82,13 +82,16 @@ void playerObject::setClip()
 }
 void playerObject::draw(SDL_Renderer* des)
 {
-	if (moveStatus == moveToLeft)
+	if (standGround == true)
 	{
-		loadImage("assets//player//playerMoveLeft.png", des);
-	}
-	else
-	{
-		loadImage("assets//player//playerMoveRight.png", des);
+		if (moveStatus == moveToLeft)
+		{
+			loadImage("assets//player//playerMoveLeft.png", des);
+		}
+		else
+		{
+			loadImage("assets//player//playerMoveRight.png", des);
+		}
 	}
 	if (typeInput.moveLeft == 1 || typeInput.moveRight == 1)
 	{
@@ -126,6 +129,14 @@ void playerObject::handleInputEvent(SDL_Event events, SDL_Renderer* screen)
 			moveStatus = moveToRight;
 			typeInput.moveRight = 1;
 			typeInput.moveLeft = 0;
+			if (standGround == true)//if stand on ground load player move
+			{
+				loadImage("assets//player//playerMoveRight.png", screen);
+			}
+			else//on sky load jump
+			{
+				loadImage("assets//player//playerJumpRight.png", screen);
+			}
 		}
 		break;
 		case SDLK_LEFT:
@@ -133,6 +144,14 @@ void playerObject::handleInputEvent(SDL_Event events, SDL_Renderer* screen)
 			moveStatus = moveToLeft;
 			typeInput.moveLeft = 1;
 			typeInput.moveRight = 0;
+			if (standGround == true)//if stand on ground load player move
+			{
+				loadImage("assets//player//playerMoveLeft.png", screen);
+			}
+			else//on sky load jump
+			{
+				loadImage("assets//player//playerJumpLeft.png", screen);
+			}
 		}
 		break;
 		}
@@ -154,7 +173,7 @@ void playerObject::handleInputEvent(SDL_Event events, SDL_Renderer* screen)
 		}
 	}
 	//jump for character
-	if (events.type == SDL_MOUSEBUTTONDOWN)
+	if (events.type == SDL_MOUSEBUTTONDOWN)//mouse button press
 	{
 		if (events.button.button == SDL_BUTTON_RIGHT)
 		{
