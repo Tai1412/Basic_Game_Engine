@@ -85,6 +85,7 @@
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="map.cpp" />
+    <ClCompile Include="playerBulletObject.cpp" />
     <ClCompile Include="playerObject.cpp" />
     <ClCompile Include="timerFps.cpp" />
   </ItemGroup>
@@ -92,6 +93,7 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="parentFunction.h" />
+    <ClInclude Include="playerBulletObject.h" />
     <ClInclude Include="playerObject.h" />
     <ClInclude Include="timerFps.h" />
   </ItemGroup>

@@ -7,6 +7,8 @@
 #define CHARACTER_JUMMP 20
 #include "parentFunction.h"
 #include "Entity.h"
+#include "playerBulletObject.h"
+#include <vector>//for bullet
 class playerObject:
 	public Entity
 {
@@ -37,6 +39,17 @@ public:
 	}
     void updatePlayerImage(SDL_Renderer* des);
 	void entityOnMap(myMap& mapData);
+    void setBullets(std::vector<playerBulletObject*> lBullets)
+    {
+        bullets = lBullets;
+    }
+    std::vector<playerBulletObject*>getBullets()
+        const
+    {
+        return bullets;
+    }
+    void proccessBulletShoot(SDL_Renderer* des);
+
 private:
 	//declare variable
 	float valueX;
@@ -53,6 +66,7 @@ private:
 	int timeBack;
 	int mapX;
 	int mapY;
+    std::vector<playerBulletObject*> bullets;
 };
 
 #endif

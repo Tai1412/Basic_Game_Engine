@@ -116,6 +116,7 @@ int main(int argc, char **argv)
 		myBackground.render(screen, NULL);
 		//myGameMap.drawMyMap(screen);//render map to screen
 		myMap mapData = myGameMap.getMyMap();
+        player.proccessBulletShoot(screen);
 		player.setMyMapXY(mapData.startX, mapData.startY);
 		player.calMovePlayer(mapData);
 		player.draw(screen);

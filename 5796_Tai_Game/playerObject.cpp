@@ -156,11 +156,56 @@ void playerObject::handleInputEvent(SDL_Event events, SDL_Renderer* screen)
 	//jump for character
 	if (events.type == SDL_MOUSEBUTTONDOWN)//mouse button press
 	{
-		if (events.button.button == SDL_BUTTON_RIGHT)
+		if (events.button.button == SDL_BUTTON_RIGHT)//click right mouse to jump
 		{
 			typeInput.jump = 1;
 		}
+        else if (events.button.button == SDL_BUTTON_LEFT)//for shoot bullet
+        {
+            playerBulletObject* bullet = new playerBulletObject();
+            if (moveStatus == moveToLeft)
+            {
+                bullet->setBulletDirector(playerBulletObject::bulletDirectLeft);
+                bullet->setRect(this->rect.x, rect.y + frameHeight*0.3);
+                bullet->loadImage("assets//player//bulletLeft.png", screen);//load bullet left image
+            }
+            else
+            {
+                bullet->setBulletDirector(playerBulletObject::bulletDirectRight);
+                bullet->setRect(this->rect.x + frameWidth - 25, rect.y + frameHeight*0.3);
+                bullet->loadImage("assets//player//bulletRight.png", screen);//load bullet right image
+            }
+            bullet->setValueX(20);//speed ofbullet
+            bullet->setIsFly(true);
+            bullets.push_back(bullet);//shoot
+        }
 	}
+}
+void playerObject::proccessBulletShoot(SDL_Renderer* des)
+{
+    for (int i = 0; i < bullets.size(); i++)//check whehter bullets have or not
+    {
+        playerBulletObject* bullet = bullets.at(i);
+        if (bullet != NULL)
+        {
+            if (bullet->getIsFly() == true)
+            {
+                bullet->handleBulletFly(screenWidth, screenHeight);
+                bullet->render(des);
+            }
+            else
+            {
+                //delete if it exceed boundary
+                bullets.erase(bullets.begin() + i);
+                if (bullet != NULL)//check
+                {
+                    delete bullet;
+                    bullet = NULL;
+                }
+                
+            }
+        }
+    }
 }
 void playerObject::calMovePlayer(myMap& mapData)
 {
