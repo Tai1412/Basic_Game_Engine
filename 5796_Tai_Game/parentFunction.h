@@ -9,6 +9,7 @@
 #include <SDL_image.h>//image
 #include <SDL_mixer.h.>//sound
 #include <SDL_ttf.h>//font
+#include <vector>
 #include "Entity.h"
 using namespace std;
 

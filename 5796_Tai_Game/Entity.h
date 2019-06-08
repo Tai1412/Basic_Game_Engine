@@ -27,7 +27,7 @@ public:
 		return object;
 	}
 	//load image	//directory path  //screen
-	virtual bool loadImage(std::string path, SDL_Renderer* screen);
+    virtual  bool loadImage(std::string path, SDL_Renderer* screen);
 	//Render
 	void render(SDL_Renderer* des, const SDL_Rect* clip = NULL);
 	void free();//free space

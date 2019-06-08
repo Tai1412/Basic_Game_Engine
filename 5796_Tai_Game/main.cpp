@@ -2,6 +2,7 @@
 #include "Entity.h"
 #include "map.h"
 #include "playerObject.h"
+#include "enemyObject.h"
 #include "timerFps.h"
 #include <iostream>
 
@@ -65,6 +66,24 @@ void close()
 	IMG_Quit();
 	SDL_Quit();
 }
+std::vector<enemyObject*> enemies()
+{
+    std::vector<enemyObject*> enemiesList;
+    enemyObject* eneObject = new enemyObject[25];//25 enemies random on map
+    for (int i = 0; i < 25; i++)
+    {
+        enemyObject* enemy = (eneObject + i);
+        if (enemy != NULL)
+        {
+            enemy->loadImage("assets//enemy//enemy_level_2.png", screen);
+            enemy->setClip();
+            enemy->setPositionX(700 + i *500);//position their standing on ground on map
+            enemy->setPositionY(200);//fall down from postion y =200
+            enemiesList.push_back(enemy);
+        }
+    }
+    return enemiesList;
+}
 
 bool loadBackgroundImage()
 {
@@ -100,6 +119,8 @@ int main(int argc, char **argv)
 	player.loadImage("assets//player//playerMoveRight.png", screen);//load image
 	player.setClip();
 
+    std::vector<enemyObject*> listEnemies = enemies();
+
 	while (!isQuit)
 	{
 		fps.startRun();
@@ -122,6 +143,16 @@ int main(int argc, char **argv)
 		player.draw(screen);
 		myGameMap.setMyMap(mapData);
 		myGameMap.drawMyMap(screen);
+        for (int i = 0; i < listEnemies.size(); i++)
+        {
+            enemyObject* enemy = listEnemies.at(i);
+            if (enemy != NULL)
+            {
+                enemy->setMyMapXY(mapData.startX, mapData.startY);
+                enemy->calMoveEnemy(mapData);
+                enemy->draw(screen);
+            }
+        }
 		SDL_RenderPresent(screen);
 
 		int realTime = fps.getTick();
@@ -139,6 +170,5 @@ int main(int argc, char **argv)
 		}
 	}
 	close();
-	system("pause");
 	return 0;
 }
