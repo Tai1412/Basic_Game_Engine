@@ -26,6 +26,7 @@ const int framePerSecond = 24;//fps=24/s
 #define maxMapX 400 //set max map x =400
 #define maxMapY 10 //max map y=10
 #define maxTiles 20
+#define diamond 4 //define diamond,4
 #define emptyTile 0
 //struct
 typedef struct myMap

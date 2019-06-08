@@ -19,6 +19,7 @@ playerObject::playerObject()
 	timeBack = 0;
 	mapX = 0;
 	mapY = 0;
+    diamondCount = 0;
 }
 
 
@@ -307,6 +308,10 @@ void playerObject::updatePlayerImage(SDL_Renderer* des)
         }
     }
 }
+void playerObject::increaseDiamond()
+{
+    diamondCount++;
+}
 void playerObject::checkPlayer(myMap& mapData)
 {
 	int x1,x2 = 0;
@@ -321,19 +326,41 @@ void playerObject::checkPlayer(myMap& mapData)
 	{
 		if (valueX > 0)//player moving to right
 		{
-			if (mapData.tile[y1][x2] != emptyTile || mapData.tile[y2][x2] != emptyTile)
-			{
-				positionX = tileSize * x2;
-				positionX -= frameWidth + 1;
-				valueX = 0;//continue move but cant
-			}
+            int value1 = mapData.tile[y1][x2];
+            int value2 = mapData.tile[y2][x2];
+            if (value1 == diamond || value2 == diamond)//touch diamon, diamond tilemat disapear
+            {
+                mapData.tile[y1][x2] = 0;
+                mapData.tile[y2][x2] = 0;
+                increaseDiamond();
+            }
+            else
+            {
+                if (value1 != emptyTile || value2 != emptyTile)
+                {
+                    positionX = tileSize * x2;
+                    positionX -= frameWidth + 1;
+                    valueX = 0;//continue move but cant
+                }
+            }
 		}
         else if (valueX < 0)
         {
-            if (mapData.tile[y1][x1] != emptyTile || mapData.tile[y2][x1] != emptyTile)
+            int value1 = mapData.tile[y1][x1];
+            int value2 = mapData.tile[y2][x1];
+            if (value1 == diamond || value2 == diamond)//touch diamon, diamond tilemat disapear
             {
-                positionX = tileSize*(x1 + 1);
-                valueX = 0;
+                mapData.tile[y1][x1] = 0;
+                mapData.tile[y2][x1] = 0;
+                increaseDiamond();
+            }
+            else
+            {
+                if (value1 != emptyTile || value2 != emptyTile)
+                {
+                    positionX = tileSize*(x1 + 1);
+                    valueX = 0;
+                }
             }
         }
 	}
@@ -347,25 +374,47 @@ void playerObject::checkPlayer(myMap& mapData)
 	{
 		if (valueY > 0)
 		{
-			if (mapData.tile[y2][x1] != emptyTile || mapData.tile[y2][x2] != emptyTile)
-			{
-				positionY = tileSize * y2;
-				positionY -= (frameHeight + 1);
-				valueY = 0;
-                standGround = true;
-                if (moveStatus == noneMove)
+            int value1 = mapData.tile[y2][x1];
+            int value2 = mapData.tile[y2][x2];
+            if (value1 == diamond || value2 == diamond)
+            {
+                mapData.tile[y2][x1] = 0;
+                mapData.tile[y2][x2] = 0;
+                increaseDiamond();
+            }
+            else
+            {
+                if (value1 != emptyTile || value2 != emptyTile)
                 {
-                    moveStatus = moveToRight;
+                    positionY = tileSize * y2;
+                    positionY -= (frameHeight + 1);
+                    valueY = 0;
+                    standGround = true;
+                    if (moveStatus == noneMove)
+                    {
+                        moveStatus = moveToRight;
+                    }
                 }
-			}
+            }
 		}
 		else if (valueY < 0)
 		{
-			if (mapData.tile[y1][x1] != emptyTile || mapData.tile[y1][x2] != emptyTile)
-			{
-				positionY = (y1 + 1)*tileSize;
-				valueY = 0;
-			}
+            int value1 = mapData.tile[y1][x1];
+            int value2 = mapData.tile[y1][x2];
+            if (value1 == diamond || value2 == diamond)
+            {
+                mapData.tile[y1][x1] = 0;
+                mapData.tile[y1][x2] = 0;
+                increaseDiamond();
+            }
+            else
+            {
+                if (value1 != emptyTile || value2 != emptyTile)
+                {
+                    positionY = (y1 + 1)*tileSize;
+                    valueY = 0;
+                }
+            }
 		}
 	}
 	positionX += valueX;

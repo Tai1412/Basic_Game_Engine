@@ -39,6 +39,7 @@ public:
 	}
     void updatePlayerImage(SDL_Renderer* des);
 	void entityOnMap(myMap& mapData);
+    void increaseDiamond();//for eat diamond func, increaseby 1
     void setBullets(std::vector<playerBulletObject*> lBullets)
     {
         bullets = lBullets;
@@ -66,6 +67,7 @@ private:
 	int timeBack;
 	int mapX;
 	int mapY;
+    int diamondCount;
     std::vector<playerBulletObject*> bullets;
 };
 

@@ -1,12 +1,36 @@
-﻿Build started 8/06/2019 10:20:04 AM.
+﻿Build started 8/06/2019 11:47:50 AM.
      1>Project "C:\Users\Tai\Documents\Visual Studio 2013\Projects\5796_Tai_Game\5796_Tai_Game\5796_Tai_Game.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         D:\Downloads\VC\bin\CL.exe /c /I"D:\Dev game\sdl2\visual studio 2013 and below\sdl2\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp playerBulletObject.cpp playerObject.cpp
+         D:\Downloads\VC\bin\CL.exe /c /I"D:\Dev game\sdl2\visual studio 2013 and below\sdl2\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Entity.cpp main.cpp map.cpp playerBulletObject.cpp playerObject.cpp timerFps.cpp
+         Entity.cpp
+         Generating Code...
+         Compiling...
+         timerFps.cpp
+         playerObject.cpp
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\playerobject.cpp(102): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\playerobject.cpp(103): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\playerobject.cpp(170): warning C4244: 'argument' : conversion from 'double' to 'const int', possible loss of data
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\playerobject.cpp(176): warning C4244: 'argument' : conversion from 'double' to 'const int', possible loss of data
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\playerobject.cpp(187): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\playerobject.cpp(268): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\playerobject.cpp(277): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\playerobject.cpp(320): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\playerobject.cpp(321): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\playerobject.cpp(322): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\playerobject.cpp(323): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\playerobject.cpp(341): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\playerobject.cpp(361): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\playerobject.cpp(369): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\playerobject.cpp(370): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\playerobject.cpp(371): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\playerobject.cpp(372): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\playerobject.cpp(389): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\playerobject.cpp(414): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\playerobject.cpp(428): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+         playerBulletObject.cpp
+         map.cpp
          main.cpp
          Generating Code...
-         Skipping... (no relevant changes detected)
-         playerObject.cpp
-         playerBulletObject.cpp
        Link:
          D:\Downloads\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Tai\Documents\Visual Studio 2013\Projects\5796_Tai_Game\Debug\5796_Tai_Game.exe" /INCREMENTAL /NOLOGO /LIBPATH:"D:\Dev game\sdl2\visual studio 2013 and below\sdl2\lib\x86" SDL2.lib SDL2main.lib SDL2_image.lib SDL2_mixer.lib SDL2_ttf.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Tai\Documents\Visual Studio 2013\Projects\5796_Tai_Game\Debug\5796_Tai_Game.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Tai\Documents\Visual Studio 2013\Projects\5796_Tai_Game\Debug\5796_Tai_Game.lib" /MACHINE:X86 Debug\Entity.obj
          Debug\main.obj
@@ -19,4 +43,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.61
+Time Elapsed 00:00:05.88
