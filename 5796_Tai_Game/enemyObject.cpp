@@ -259,3 +259,45 @@ void enemyObject::processEnemyMoveType(SDL_Renderer* screen)
         }
     }
 }
+void enemyObject::figureBullets(playerBulletObject* bullet, SDL_Renderer* screen)
+{
+    if (bullet != NULL)
+    {
+        bullet->setTypeBullet(playerBulletObject::enemyBullet);
+        bullet->loadBulletShapeImage(screen);
+        bullet->setIsFly(true);
+        bullet->setBulletDirector(playerBulletObject::bulletDirectLeft);
+        bullet->setRect(rect.x + 20, positionY + 20);//positon of bullet when shoot from monster
+        bullet->setValueX(10);//speed of bullet
+        bullets.push_back(bullet);
+    }
+}
+void enemyObject::createBullets(SDL_Renderer* screen, const int& limitX, const int& limitY)
+{
+    for (int i = 0;i<bullets.size(); i++)
+    {
+        playerBulletObject* bullet = bullets.at(i);
+        if (bullet != NULL)
+        {
+            if (bullet->getIsFly())
+            {
+                int areaBulletShoot = rect.x + frameWidth - bullet->getRect().x;//monster shoot bullet in limit area
+                if (areaBulletShoot < 300 && areaBulletShoot > 0)
+                {
+                    bullet->handleBulletFly(limitX, limitY);
+                    bullet->render(screen);
+                }
+                else
+                {
+                    bullet->setIsFly(false);
+                }
+            }
+            else
+            {
+                //not destroy the bullet if it exceed limit, get them back
+                bullet->setIsFly(true);
+                bullet->setRect(rect.x + 20, positionY + 20);
+            }
+        }
+    }
+}

@@ -6,6 +6,7 @@
 #define MAXIMUM_F_SPEED 10
 #include "parentFunction.h"
 #include "Entity.h"
+#include "playerBulletObject.h"
 class enemyObject : public Entity
 {
 public:
@@ -78,6 +79,17 @@ public:
         typeInput.moveLeft = inputLeft;
     }
     void processEnemyMoveType(SDL_Renderer *screen);
+    std::vector<playerBulletObject*>getBullets()
+        const
+    {
+        return bullets;
+    }
+    void setBullets(std::vector<playerBulletObject*> lBullets)
+    {
+        bullets = lBullets;
+    }
+    void figureBullets(playerBulletObject* bullet, SDL_Renderer* screen);
+    void createBullets(SDL_Renderer* screen, const int& limitX, const int& limitY);
 private:
     //like playerobject
     int frame;
@@ -96,6 +108,7 @@ private:
     int animationLeft;
     int animationRight;
     myInput typeInput;
+    std::vector<playerBulletObject*>bullets;
 
 };
 

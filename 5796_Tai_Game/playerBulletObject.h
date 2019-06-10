@@ -13,6 +13,11 @@ public:
         bulletDirectRight=10,
         bulletDirectLeft=11
     };
+    enum bulletShape
+    {
+        //type of buletshape 
+        enemyBullet = 21
+    };
     void setValueX(const int& x)
     {
         valueX = x;
@@ -49,12 +54,23 @@ public:
     {
         return bulletDirector;
     }
+    void setTypeBullet(const int& typeBull)
+    {
+        bulletShape = typeBull;
+    }
+    int getTypeBullet()
+        const
+    {
+        return bulletShape;
+    }
+    void loadBulletShapeImage(SDL_Renderer* bulletImage);
     void handleBulletFly(const int& boundaryX, const int& boundaryY);//limit screen x,y axis for checkig bullet
-   
+
 private:
     int valueX;
     int valueY;
     int bulletDirector;
+    int bulletShape;
     bool isFly;
 };
 

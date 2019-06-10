@@ -99,6 +99,9 @@ std::vector<enemyObject*> enemies()
             enemy->setPositionY(200);//fall down from postion y =200
             enemy->setEnemyMoveType(enemyObject::notMoveEnemy);
             enemy->setLeftInput(0);//not move
+            //shoot bullet
+            playerBulletObject* bullet = new playerBulletObject();
+            enemy->figureBullets(bullet, screen);
             enemiesList.push_back(enemy);
         }
     }
@@ -171,6 +174,7 @@ int main(int argc, char **argv)
                 enemy->setMyMapXY(mapData.startX, mapData.startY);
                 enemy->processEnemyMoveType(screen);
                 enemy->calMoveEnemy(mapData);
+                enemy->createBullets(screen, screenWidth, screenHeight);
                 enemy->draw(screen);
 
             }
@@ -191,6 +195,17 @@ int main(int argc, char **argv)
 			
 		}
 	}
+    //free when game close
+    for (int i = 0; i < listEnemies.size(); i++)
+    {
+        enemyObject* enemy = listEnemies.at(i);
+        if (enemy != NULL)
+        {
+            enemy->free();
+            enemy = NULL;
+        }
+    }
+    listEnemies.clear();
 	close();
 	return 0;
 }
