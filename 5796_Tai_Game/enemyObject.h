@@ -11,6 +11,11 @@ class enemyObject : public Entity
 public:
     enemyObject();
     ~enemyObject();
+    enum enemyMoveType
+    {
+        notMoveEnemy = 0,
+        moveInLimitArea=1, //enemy move in specific area
+    };
     bool loadImage(std::string path, SDL_Renderer* screen);
     void setValueX(const float& valX)
     {
@@ -59,6 +64,20 @@ public:
     void calMoveEnemy(myMap& mapData);
     //check enemy stand on tile
     void checkEnemy(myMap& mapData);
+    void setEnemyMoveType(const int& moveType)
+    {
+        enemyMoveType = moveType;
+    }
+    void setAnimationMovePosition(const int& positionLeft, const int& positionRight)
+    {
+        animationLeft = positionLeft,
+        animationRight = positionRight;
+    }
+    void setLeftInput(const int& inputLeft)
+    {
+        typeInput.moveLeft = inputLeft;
+    }
+    void processEnemyMoveType(SDL_Renderer *screen);
 private:
     //like playerobject
     int frame;
@@ -73,6 +92,10 @@ private:
     float valueY;
     int mapX;
     int mapY;
+    int enemyMoveType;
+    int animationLeft;
+    int animationRight;
+    myInput typeInput;
 
 };
 

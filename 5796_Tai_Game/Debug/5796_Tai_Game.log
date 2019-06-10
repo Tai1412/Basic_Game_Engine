@@ -1,10 +1,23 @@
-﻿Build started 9/06/2019 3:02:15 AM.
+﻿Build started 10/06/2019 3:06:21 PM.
      1>Project "C:\Users\Tai\Documents\Visual Studio 2013\Projects\5796_Tai_Game\5796_Tai_Game\5796_Tai_Game.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         D:\Downloads\VC\bin\CL.exe /c /I"D:\Dev game\sdl2\visual studio 2013 and below\sdl2\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
-         main.cpp
-     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\main.cpp(80): warning C4244: 'argument' : conversion from 'int' to 'const float', possible loss of data
-     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\main.cpp(146): warning C4018: '<' : signed/unsigned mismatch
+         D:\Downloads\VC\bin\CL.exe /c /I"D:\Dev game\sdl2\visual studio 2013 and below\sdl2\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt enemyObject.cpp
+         enemyObject.cpp
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\enemyobject.cpp(86): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\enemyobject.cpp(87): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\enemyobject.cpp(153): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\enemyobject.cpp(154): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\enemyobject.cpp(155): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\enemyobject.cpp(156): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\enemyobject.cpp(166): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\enemyobject.cpp(177): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\enemyobject.cpp(184): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\enemyobject.cpp(185): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\enemyobject.cpp(186): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\enemyobject.cpp(187): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\enemyobject.cpp(197): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\enemyobject.cpp(209): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\enemyobject.cpp(222): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
        Link:
          D:\Downloads\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Tai\Documents\Visual Studio 2013\Projects\5796_Tai_Game\Debug\5796_Tai_Game.exe" /INCREMENTAL /NOLOGO /LIBPATH:"D:\Dev game\sdl2\visual studio 2013 and below\sdl2\lib\x86" SDL2.lib SDL2main.lib SDL2_image.lib SDL2_mixer.lib SDL2_ttf.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Tai\Documents\Visual Studio 2013\Projects\5796_Tai_Game\Debug\5796_Tai_Game.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Tai\Documents\Visual Studio 2013\Projects\5796_Tai_Game\Debug\5796_Tai_Game.lib" /MACHINE:X86 Debug\enemyObject.obj
          Debug\Entity.obj
@@ -18,4 +31,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.72
+Time Elapsed 00:00:01.73

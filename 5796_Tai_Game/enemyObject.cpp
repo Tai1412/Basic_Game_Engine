@@ -12,6 +12,10 @@ enemyObject::enemyObject()
     positionY = 0;
     standGround = 0;
     timeBack = 0;
+    animationLeft = 0;
+    animationRight = 0;
+    typeInput.moveLeft = 0;//first time down, stand
+    enemyMoveType = notMoveEnemy;
     frame = 0;
 }
 
@@ -107,6 +111,15 @@ void enemyObject::calMoveEnemy(myMap& mapData)
         {
             valueY = MAXIMUM_F_SPEED;
         }
+
+        if (typeInput.moveLeft == 1)
+        {
+            valueX -= 4;
+        }
+        else if (typeInput.moveRight == 1)
+        {
+            valueX += 4;
+        }
         checkEnemy(mapData);
     }
     else if (timeBack > 0)
@@ -119,6 +132,8 @@ void enemyObject::calMoveEnemy(myMap& mapData)
             if (positionX > 320)
             {
                 positionX -= 320;
+                animationLeft -= 320;
+                animationRight -= 320;
             }
             else
             {
@@ -126,6 +141,7 @@ void enemyObject::calMoveEnemy(myMap& mapData)
             }
             positionY = 0;
             timeBack = 0;
+            typeInput.moveLeft = 1;
         }
     }
 }
@@ -209,5 +225,37 @@ void enemyObject::checkEnemy(myMap& mapData)
     if (positionY>mapData.maxY)
     {
         timeBack = 60;//delay 60;
+    }
+}
+void enemyObject::processEnemyMoveType(SDL_Renderer* screen)
+{
+    if (enemyMoveType == notMoveEnemy)
+    {
+        
+    }
+    else
+    {
+        if (standGround == true)//when enemy stand on ground they will move, if they falling, not move
+        {
+            if (positionX > animationRight)//exceed limit right, go back to left
+            {
+                typeInput.moveLeft = 1;
+                typeInput.moveRight = 0;
+                loadImage("assets//enemy//enemy_level_1_left.png", screen);
+            }
+            else if (positionX < animationLeft)
+            {
+                typeInput.moveLeft = 0;
+                typeInput.moveRight = 1;
+                loadImage("assets//enemy//enemy_level_1_right.png", screen);
+            }
+        }
+        else//falling down
+        {
+            if (typeInput.moveLeft == 1)
+            {
+                loadImage("assets//enemy//enemy_level_1_left.png", screen);
+            }
+        }
     }
 }

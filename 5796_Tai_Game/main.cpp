@@ -69,7 +69,25 @@ void close()
 std::vector<enemyObject*> enemies()
 {
     std::vector<enemyObject*> enemiesList;
-    enemyObject* eneObject = new enemyObject[25];//25 enemies random on map
+    enemyObject* moveEnemy = new enemyObject[25];//25
+    for (int i = 0; i < 25; i++)
+    {
+        enemyObject* enemy = (moveEnemy + i);
+        if (enemy != NULL)
+        {
+            enemy->loadImage("assets//enemy//enemy_level_1_left.png", screen);
+            enemy->setClip();
+            enemy->setEnemyMoveType(enemyObject::moveInLimitArea);
+            enemy->setPositionX(500 + i * 400);
+            enemy->setPositionY(200);//fall down from postion y =200
+            int position1 = enemy->getPositionX() - 60;//depend on currently positionX
+            int position2 = enemy->getPositionX() + 60;
+            enemy->setAnimationMovePosition(position1, position2);
+            enemy->setLeftInput(1);//not move
+            enemiesList.push_back(enemy);
+        }
+    }
+    enemyObject* eneObject = new enemyObject[25];//25 enemies random on map, for enemyNotMove
     for (int i = 0; i < 25; i++)
     {
         enemyObject* enemy = (eneObject + i);
@@ -79,6 +97,8 @@ std::vector<enemyObject*> enemies()
             enemy->setClip();
             enemy->setPositionX(700 + i *500);//position their standing on ground on map
             enemy->setPositionY(200);//fall down from postion y =200
+            enemy->setEnemyMoveType(enemyObject::notMoveEnemy);
+            enemy->setLeftInput(0);//not move
             enemiesList.push_back(enemy);
         }
     }
@@ -149,8 +169,10 @@ int main(int argc, char **argv)
             if (enemy != NULL)
             {
                 enemy->setMyMapXY(mapData.startX, mapData.startY);
+                enemy->processEnemyMoveType(screen);
                 enemy->calMoveEnemy(mapData);
                 enemy->draw(screen);
+
             }
         }
 		SDL_RenderPresent(screen);
