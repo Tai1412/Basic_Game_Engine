@@ -177,6 +177,34 @@ int main(int argc, char **argv)
                 enemy->createBullets(screen, screenWidth, screenHeight);
                 enemy->draw(screen);
 
+                //check collise of monster to character
+                SDL_Rect playerRect = player.getFrameRect();
+                bool pCollision = false;
+                std::vector<playerBulletObject*> bullets = enemy->getBullets();
+                for (int j = 0; j < bullets.size(); ++j)
+                {
+                    playerBulletObject* eBullets = bullets.at(j);//enemy bullets
+                    if (eBullets)
+                    {
+                        pCollision = parentFunction::entityColliseChecking(eBullets->getRect(), playerRect);//check enemy bullet on character
+                        if (pCollision)
+                        {
+                            enemy->destroyBullet(j);
+                            break;
+                        }
+                    }
+                }
+                SDL_Rect eneRect = enemy->getFrameRect();
+                bool eCollision = parentFunction::entityColliseChecking(playerRect, eneRect);
+                if (pCollision || eCollision)//if  1 of them true, character die
+                {
+                    //destroy end quit for now
+                        enemy->free();
+                        close();
+                        SDL_Quit();
+                        return 0;
+                }
+
             }
         }
     std:vector<playerBulletObject*> bullets = player.getBullets();

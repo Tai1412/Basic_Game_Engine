@@ -23,7 +23,15 @@ enemyObject::enemyObject()
 enemyObject::~enemyObject()
 {
 }
-
+SDL_Rect enemyObject::getFrameRect()
+{//get 1 frame
+    SDL_Rect rect_;
+    rect_.x = rect.x;//x
+    rect_.y = rect.y;//y
+    rect_.w = frameWidth;//width
+    rect_.h = frameHeight;//height
+    return rect_;
+}
 bool enemyObject::loadImage(std::string path, SDL_Renderer* screen)
 {
     bool reUse = Entity::loadImage(path, screen);
@@ -142,6 +150,19 @@ void enemyObject::calMoveEnemy(myMap& mapData)
             positionY = 0;
             timeBack = 0;
             typeInput.moveLeft = 1;
+        }
+    }
+}
+void enemyObject::destroyBullet(const int& destr)
+{
+    if (bullets.size() > 0 && destr < bullets.size())
+    {
+        playerBulletObject* eneBullet = bullets.at(destr);
+        bullets.erase(bullets.begin() + destr);//get rid of bullet from bullets
+        if (eneBullet)
+        {
+            delete eneBullet;
+            eneBullet = NULL;
         }
     }
 }

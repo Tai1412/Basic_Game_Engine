@@ -89,6 +89,8 @@ public:
         bullets = lBullets;
     }
     void figureBullets(playerBulletObject* bullet, SDL_Renderer* screen);
+    void destroyBullet(const int& destr);//of enemy
+    SDL_Rect getFrameRect();
     void createBullets(SDL_Renderer* screen, const int& limitX, const int& limitY);
 private:
     //like playerobject

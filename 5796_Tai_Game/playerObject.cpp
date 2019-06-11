@@ -26,6 +26,16 @@ playerObject::playerObject()
 playerObject::~playerObject()
 {
 }
+SDL_Rect playerObject::getFrameRect()
+{//get 1 frame
+    SDL_Rect rect_;
+    rect_.x = rect.x;//x
+    rect_.y = rect.y;//y
+    rect_.w = frameWidth;//width
+    rect_.h = frameHeight;//height
+    return rect_;
+
+}
 
 bool playerObject::loadImage(std::string path, SDL_Renderer* screen)
 {

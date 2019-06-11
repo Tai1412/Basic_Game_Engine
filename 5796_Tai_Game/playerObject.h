@@ -38,7 +38,7 @@ public:
 		mapY = y;
 	}
     void updatePlayerImage(SDL_Renderer* des);
-    void destroyBullet(const int& destr);
+    void destroyBullet(const int& destr);//of character
 	void entityOnMap(myMap& mapData);
     void increaseDiamond();//for eat diamond func, increaseby 1
     void setBullets(std::vector<playerBulletObject*> lBullets)
@@ -51,7 +51,7 @@ public:
         return bullets;
     }
     void proccessBulletShoot(SDL_Renderer* des);
-
+    SDL_Rect getFrameRect();
 private:
 	//declare variable
 	float valueX;
