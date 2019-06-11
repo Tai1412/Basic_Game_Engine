@@ -208,6 +208,19 @@ void playerObject::proccessBulletShoot(SDL_Renderer* des)
         }
     }
 }
+void playerObject::destroyBullet(const int& destr)
+{
+    if (bullets.size() > 0 && destr < bullets.size())
+    {
+        playerBulletObject* playerBullet = bullets.at(destr);
+        bullets.erase(bullets.begin() + destr);//get rid of bullet from bullets
+        if (playerBullet)
+        {
+            delete playerBullet;
+            playerBullet = NULL;
+        }
+    }
+}
 void playerObject::calMovePlayer(myMap& mapData)
 {
     //when the time back == 0 , character respawn

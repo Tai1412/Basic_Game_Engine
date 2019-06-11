@@ -86,6 +86,7 @@
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="map.cpp" />
+    <ClCompile Include="parentFunction.cpp" />
     <ClCompile Include="playerBulletObject.cpp" />
     <ClCompile Include="playerObject.cpp" />
     <ClCompile Include="timerFps.cpp" />

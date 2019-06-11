@@ -40,7 +40,10 @@ typedef struct myMap
 	char* fileName;
 	int tile[maxMapY][maxMapX];//400*10=4000
 } myMap;//object
-
+namespace parentFunction//namespace use for check collision for the entity,use for all(bullet kill monster, and monster kill player).
+{
+    bool entityColliseChecking(const SDL_Rect& entity1, const SDL_Rect& entity2);//declare
+}
 typedef struct myInput
 {
 	int moveLeft;

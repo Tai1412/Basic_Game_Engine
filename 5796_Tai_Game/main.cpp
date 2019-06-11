@@ -179,6 +179,37 @@ int main(int argc, char **argv)
 
             }
         }
+    std:vector<playerBulletObject*> bullets = player.getBullets();
+        for (int t = 0; t < bullets.size(); ++t)
+        {
+            playerBulletObject* playerBullet = bullets.at(t);
+            if (playerBullet != NULL)
+            {
+                //check each bullet for each enemy
+                for (int b = 0; b < listEnemies.size();++b)
+                { 
+                    enemyObject* enemy = listEnemies.at(b);
+                    if (enemy != NULL)
+                    {
+                        SDL_Rect bRect;
+                        bRect.x = enemy->getRect().x;
+                        bRect.y = enemy->getRect().y;
+                        bRect.w = enemy->getFrameWidth();//take 1 frame
+                        bRect.h = enemy->getHeightFrame();
+
+                        SDL_Rect tRect = playerBullet->getRect();
+                        //check collise or not
+                        bool tCollisition = parentFunction::entityColliseChecking(tRect, bRect);
+                        if (tCollisition)//true, destroy bullet
+                        {
+                            player.destroyBullet(t);
+                            enemy->free();
+                            listEnemies.erase(listEnemies.begin() + b);//remove the enemy
+                        }
+                    }
+                }
+            }
+        }
 		SDL_RenderPresent(screen);
 
 		int realTime = fps.getTick();

@@ -36,6 +36,9 @@
     <ClCompile Include="enemyObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="parentFunction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="parentFunction.h">
