@@ -3,6 +3,7 @@
 #include "map.h"
 #include "playerObject.h"
 #include "enemyObject.h"
+#include "manageExploision.h"
 #include "timerFps.h"
 #include <iostream>
 
@@ -10,6 +11,9 @@ Entity myBackground;
 Map myGameMap;
 playerObject player;
 timerFps fps;
+manageExploision enemyExploded;
+manageExploision playerExploded;
+
 bool initData()
 {
 	bool success = true;
@@ -144,6 +148,18 @@ int main(int argc, char **argv)
 
     std::vector<enemyObject*> listEnemies = enemies();
 
+    bool expl = enemyExploded.loadImage("assets//exploi//exploi.png", screen);//loadimage exploi oof ene
+    if (!expl)
+    {
+        return -1;
+    }
+    enemyExploded.setClip();
+    expl = playerExploded.loadImage("assets//exploi//exploi.png", screen);//loadimage exploi of player
+    if (!expl)
+    {
+        return -1;
+    }
+    playerExploded.setClip();
 	while (!isQuit)
 	{
 		fps.startRun();
@@ -198,6 +214,19 @@ int main(int argc, char **argv)
                 bool eCollision = parentFunction::entityColliseChecking(playerRect, eneRect);
                 if (pCollision || eCollision)//if  1 of them true, character die
                 {
+                    int frameExploiWidth = playerExploded.getFrameWidht();
+                    int frameExploiHeight = playerExploded.getFrameHeight();
+                    for (int i = 0; i < 8; i++)//collide exploid
+                    {
+                        //when the bullet touch, exploi in center
+                        int positionX = (player.getRect().x + player.getFrameWidht()*0.5) - frameExploiWidth*0.5;
+                        int positionY = (player.getRect().y + player.getFrameHeight()*0.5) - frameExploiHeight*0.5;
+
+                        playerExploded.setFrame(i);
+                        playerExploded.setRect(positionX, positionY);
+                        playerExploded.draw(screen);
+                        SDL_RenderPresent(screen);
+                    }
                     //destroy end quit for now
                         enemy->free();
                         close();
@@ -207,6 +236,9 @@ int main(int argc, char **argv)
 
             }
         }
+        int frameExploiWidth = enemyExploded.getFrameWidht();
+        int frameExploiHeight = enemyExploded.getFrameHeight();
+
     std:vector<playerBulletObject*> bullets = player.getBullets();
         for (int t = 0; t < bullets.size(); ++t)
         {
@@ -230,6 +262,16 @@ int main(int argc, char **argv)
                         bool tCollisition = parentFunction::entityColliseChecking(tRect, bRect);
                         if (tCollisition)//true, destroy bullet
                         {
+                            //exploi first, when collide
+                            for (int i = 0; i < 8; ++i)//run 8 frame
+                            {
+                                int positionX = playerBullet->getRect().x - frameExploiWidth*0.5;//when the bullet touch, exploi in center
+                                int positionY = playerBullet->getRect().y - frameExploiHeight*0.5;
+                                enemyExploded.setFrame(i);
+                                enemyExploded.setRect(positionX, positionY);
+                                enemyExploded.draw(screen);
+                            }
+                            //destroy
                             player.destroyBullet(t);
                             enemy->free();
                             listEnemies.erase(listEnemies.begin() + b);//remove the enemy

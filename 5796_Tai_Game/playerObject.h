@@ -38,6 +38,16 @@ public:
 		mapY = y;
 	}
     void updatePlayerImage(SDL_Renderer* des);
+    int getFrameWidht()
+        const
+    {
+        return frameWidth;
+    }
+    int getFrameHeight()
+        const
+    {
+        return frameHeight;
+    }
     void destroyBullet(const int& destr);//of character
 	void entityOnMap(myMap& mapData);
     void increaseDiamond();//for eat diamond func, increaseby 1
