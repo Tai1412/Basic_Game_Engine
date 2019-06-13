@@ -9,6 +9,7 @@
 #include "Entity.h"
 #include "playerBulletObject.h"
 #include <vector>//for bullet
+static char diamondSound[] = { "assets//sound//pickDiamond.wav" };
 class playerObject:
 	public Entity
 {
@@ -18,7 +19,7 @@ public:
 
 	bool loadImage(std::string path, SDL_Renderer* screen);
 	void draw(SDL_Renderer* des);//will draw each frame
-	void handleInputEvent(SDL_Event events, SDL_Renderer* screen);//handle event
+    void handleInputEvent(SDL_Event events, SDL_Renderer* screen, Mix_Chunk* playerBulletSound);//handle event
 	enum typeMove
 	{
         noneMove = 0,

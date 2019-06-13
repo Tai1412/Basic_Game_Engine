@@ -124,7 +124,7 @@ void playerObject::draw(SDL_Renderer* des)
 	
 }
 //event proccesss
-void playerObject::handleInputEvent(SDL_Event events, SDL_Renderer* screen)
+void playerObject::handleInputEvent(SDL_Event events, SDL_Renderer* screen, Mix_Chunk* playerBulletSound)
 {
 	if (events.type == SDL_KEYDOWN)
 	{
@@ -179,12 +179,14 @@ void playerObject::handleInputEvent(SDL_Event events, SDL_Renderer* screen)
                 bullet->setBulletDirector(playerBulletObject::bulletDirectLeft);
                 bullet->setRect(this->rect.x, rect.y + frameHeight*0.3);
                 bullet->loadImage("assets//player//bulletLeft.png", screen);//load bullet left image
+                Mix_PlayChannel(-1, playerBulletSound, 0);
             }
             else
             {
                 bullet->setBulletDirector(playerBulletObject::bulletDirectRight);
                 bullet->setRect(this->rect.x + frameWidth - 25, rect.y + frameHeight*0.3);
                 bullet->loadImage("assets//player//bulletRight.png", screen);//load bullet right image
+                Mix_PlayChannel(-1, playerBulletSound, 0);//sound when shoot bullet
             }
             bullet->setValueX(20);//speed ofbullet
             bullet->setIsFly(true);
@@ -334,6 +336,9 @@ void playerObject::updatePlayerImage(SDL_Renderer* des)
 void playerObject::increaseDiamond()
 {
     diamondCount++;
+    Mix_Chunk* diamoundCountSound = Mix_LoadWAV(diamondSound);
+    if (diamoundCountSound != NULL)
+        Mix_PlayChannel(-1, diamoundCountSound, 0);
 }
 void playerObject::checkPlayer(myMap& mapData)
 {

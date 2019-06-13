@@ -65,6 +65,23 @@ bool initData()
         {
             success = false;
         }
+        //sound
+        if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096) == -1)
+        {
+            return false;
+        }
+        playerBulletSound = Mix_LoadWAV(playerBullet);
+        enemyExplodedSound = Mix_LoadWAV(enemyExplodedS);
+        playerExplodedSound = Mix_LoadWAV(playerExplodedS);
+        if (playerBulletSound == NULL || enemyExplodedSound == NULL || playerExplodedSound == NULL)
+        {
+            return false;
+        }
+        backGroundSound = Mix_LoadMUS(backGroundS);
+        if (backGroundSound == NULL){
+            return false;
+        }
+       
 	}
 	return success;
 }
@@ -77,6 +94,10 @@ void close()
 
 	SDL_DestroyWindow(window);
 	window = NULL;
+    //pause
+    Mix_PausedMusic();
+    //delete song from memory
+    Mix_FreeMusic(backGroundSound);
 
 	IMG_Quit();
 	SDL_Quit();
@@ -150,6 +171,8 @@ int main(int argc, char **argv)
 	{
 		return -1;
 	}
+    //		how many times to loop the music (-1 play infinitely)
+    Mix_PlayMusic(backGroundSound, -1);
 
 	myGameMap.loadMyMap("assets/myMap/myMapSet.dat");
 	myGameMap.loadMyMapTiles(screen);
@@ -201,7 +224,7 @@ int main(int argc, char **argv)
 			{
 				isQuit = true;
 			}
-			player.handleInputEvent(_event, screen);
+			player.handleInputEvent(_event, screen,playerBulletSound);
 		}
 		SDL_SetRenderDrawColor(screen, 167, 167, 167, 167);
 		SDL_RenderClear(screen);
@@ -265,6 +288,7 @@ int main(int argc, char **argv)
                         {
                             //respawn
                             player.setRect(0, 0);
+                            Mix_PlayChannel(-1, playerExplodedSound, 0);
                             player.setTimeBack(60);
                             SDL_Delay(1000);//1s
                             playerLifeValue--;//player life deduct
@@ -273,10 +297,16 @@ int main(int argc, char **argv)
                         else
                         {
                             //destroy end quit for now
-                            enemy->free();
-                            close();
-                            SDL_Quit();
-                            return 0;
+                            //display messagebox
+                            if (MessageBox(NULL, L":( Good Luck Nextime", L"You Dead", MB_OK | MB_ICONEXCLAMATION) == IDOK)
+                            {
+                                
+                                enemy->free();
+                                close();
+                                SDL_Quit();
+                                return 0;
+                            }
+
                         }
                     
                 }
@@ -321,6 +351,7 @@ int main(int argc, char **argv)
                             }
                             //destroy
                             player.destroyBullet(t);
+                            Mix_PlayChannel(-1, enemyExplodedSound, 0);
                             enemy->free();
                             listEnemies.erase(listEnemies.begin() + b);//remove the enemy
                         }

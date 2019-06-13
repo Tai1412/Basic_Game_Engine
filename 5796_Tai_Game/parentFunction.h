@@ -17,6 +17,14 @@ static SDL_Window* window = NULL;
 static SDL_Renderer* screen = NULL;
 static SDL_Event _event;
 
+static Mix_Chunk* playerBulletSound;
+static Mix_Chunk* enemyExplodedSound=NULL;
+static Mix_Chunk* playerExplodedSound=NULL;
+static Mix_Music* backGroundSound = NULL;
+static char playerBullet[] = { "assets//sound//bullet.wav" };
+static char enemyExplodedS[] = { "assets//sound//enemyExploded.wav" };
+static char playerExplodedS[] = { "assets//sound//playerExploded.wav" }; 
+static char backGroundS[] = { "assets//sound//music.ogg" };
 //screen size
 const int screenWidth = 1280;//full width
 const int screenHeight = 640;//full heigth 
