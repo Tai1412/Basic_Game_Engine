@@ -85,6 +85,7 @@
     <ClCompile Include="enemyObject.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="manageDisplayThing.cpp" />
     <ClCompile Include="manageExploision.cpp" />
     <ClCompile Include="map.cpp" />
     <ClCompile Include="parentFunction.cpp" />
@@ -95,6 +96,7 @@
   <ItemGroup>
     <ClInclude Include="enemyObject.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="manageDisplayThing.h" />
     <ClInclude Include="manageExploision.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="parentFunction.h" />

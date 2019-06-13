@@ -42,6 +42,9 @@
     <ClCompile Include="manageExploision.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="manageDisplayThing.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="parentFunction.h">
@@ -66,6 +69,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="manageExploision.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="manageDisplayThing.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

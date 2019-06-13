@@ -51,6 +51,11 @@ public:
     void destroyBullet(const int& destr);//of character
 	void entityOnMap(myMap& mapData);
     void increaseDiamond();//for eat diamond func, increaseby 1
+    int getDiamondCount()
+        const
+    {
+        return diamondCount;
+    }
     void setBullets(std::vector<playerBulletObject*> lBullets)
     {
         bullets = lBullets;
@@ -62,6 +67,10 @@ public:
     }
     void proccessBulletShoot(SDL_Renderer* des);
     SDL_Rect getFrameRect();
+    void setTimeBack(const int& TimeBack)
+    {
+        timeBack = TimeBack;
+    }
 private:
 	//declare variable
 	float valueX;

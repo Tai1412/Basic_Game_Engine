@@ -1,26 +1,30 @@
-﻿Build started 12/06/2019 7:42:52 AM.
+﻿Build started 13/06/2019 8:14:50 PM.
      1>Project "C:\Users\Tai\Documents\Visual Studio 2013\Projects\5796_Tai_Game\5796_Tai_Game\5796_Tai_Game.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          D:\Downloads\VC\bin\CL.exe /c /I"D:\Dev game\sdl2\visual studio 2013 and below\sdl2\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
          main.cpp
-     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\main.cpp(85): warning C4244: 'argument' : conversion from 'int' to 'const float', possible loss of data
-     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\main.cpp(87): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\main.cpp(88): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\main.cpp(102): warning C4244: 'argument' : conversion from 'int' to 'const float', possible loss of data
-     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\main.cpp(185): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\main.cpp(200): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\main.cpp(222): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
-     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\main.cpp(223): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
-     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\main.cpp(243): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\main.cpp(249): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\main.cpp(268): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
-     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\main.cpp(269): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
-     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\main.cpp(300): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\main.cpp(242): warning C4102: 'std' : unreferenced label
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\main.cpp(96): warning C4244: 'argument' : conversion from 'int' to 'const float', possible loss of data
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\main.cpp(98): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\main.cpp(99): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\main.cpp(113): warning C4244: 'argument' : conversion from 'int' to 'const float', possible loss of data
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\main.cpp(162): warning C4244: 'argument' : conversion from 'double' to 'const int', possible loss of data
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\main.cpp(218): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\main.cpp(233): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\main.cpp(255): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\main.cpp(256): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\main.cpp(290): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\main.cpp(296): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\main.cpp(316): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\main.cpp(317): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\main.cpp(353): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\main.cpp(359): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\main.cpp(386): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\tai\documents\visual studio 2013\projects\5796_tai_game\5796_tai_game\main.cpp(289): warning C4102: 'std' : unreferenced label
        Link:
          D:\Downloads\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Tai\Documents\Visual Studio 2013\Projects\5796_Tai_Game\Debug\5796_Tai_Game.exe" /INCREMENTAL /NOLOGO /LIBPATH:"D:\Dev game\sdl2\visual studio 2013 and below\sdl2\lib\x86" SDL2.lib SDL2main.lib SDL2_image.lib SDL2_mixer.lib SDL2_ttf.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Tai\Documents\Visual Studio 2013\Projects\5796_Tai_Game\Debug\5796_Tai_Game.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Tai\Documents\Visual Studio 2013\Projects\5796_Tai_Game\Debug\5796_Tai_Game.lib" /MACHINE:X86 Debug\enemyObject.obj
          Debug\Entity.obj
          Debug\main.obj
+         Debug\manageDisplayThing.obj
          Debug\manageExploision.obj
          Debug\map.obj
          Debug\parentFunction.obj
@@ -32,4 +36,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.70
+Time Elapsed 00:00:01.53

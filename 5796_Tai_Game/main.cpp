@@ -4,6 +4,7 @@
 #include "playerObject.h"
 #include "enemyObject.h"
 #include "manageExploision.h"
+#include "manageDisplayThing.h"
 #include "timerFps.h"
 #include <iostream>
 
@@ -13,6 +14,7 @@ playerObject player;
 timerFps fps;
 manageExploision enemyExploded;
 manageExploision playerExploded;
+TTF_Font* font=NULL;
 
 bool initData()
 {
@@ -54,6 +56,15 @@ bool initData()
 				success = false;
 		}
 		cout << "Succes create window" << endl;
+        if (TTF_Init() == -1)
+        {
+            success = false;
+        }
+        font = TTF_OpenFont("assets//font//vermin_vibes_1989.ttf",20);//size 12
+        if (font == NULL)
+        {
+            success = false;
+        }
 	}
 	return success;
 }
@@ -146,6 +157,10 @@ int main(int argc, char **argv)
 	player.loadImage("assets//player//playerMoveRight.png", screen);//load image
 	player.setClip();
 
+    diamondScore diamondScoreIcon;
+    diamondScoreIcon.init(screen);
+    diamondScoreIcon.setPosition(screenWidth*0.5 - 220, 0);
+
     std::vector<enemyObject*> listEnemies = enemies();
 
     bool expl = enemyExploded.loadImage("assets//exploi//exploi.png", screen);//loadimage exploi oof ene
@@ -160,6 +175,23 @@ int main(int argc, char **argv)
         return -1;
     }
     playerExploded.setClip();
+    //player life
+    int deadTimes = 0;
+
+    //game time count
+    manageDisplayThing gameTimeCount;
+    gameTimeCount.setColor(manageDisplayThing::textBlack);//black
+
+    manageDisplayThing scoreCount;//kill monster score
+    scoreCount.setColor(manageDisplayThing::textBlack);//black
+    UINT scoreValue = 0;
+
+    manageDisplayThing diamondGCount;//player take diamon score
+    diamondGCount.setColor(manageDisplayThing::textBlack);//black
+
+    manageDisplayThing playerLife;//life of character
+    playerLife.setColor(manageDisplayThing::textRed);//red
+    UINT playerLifeValue = 3;
 	while (!isQuit)
 	{
 		fps.startRun();
@@ -182,6 +214,7 @@ int main(int argc, char **argv)
 		player.draw(screen);
 		myGameMap.setMyMap(mapData);
 		myGameMap.drawMyMap(screen);
+        diamondScoreIcon.draw(screen);
         for (int i = 0; i < listEnemies.size(); i++)
         {
             enemyObject* enemy = listEnemies.at(i);
@@ -227,11 +260,25 @@ int main(int argc, char **argv)
                         playerExploded.draw(screen);
                         SDL_RenderPresent(screen);
                     }
-                    //destroy end quit for now
-                        enemy->free();
-                        close();
-                        SDL_Quit();
-                        return 0;
+                        deadTimes++;
+                        if (deadTimes <= 3)
+                        {
+                            //respawn
+                            player.setRect(0, 0);
+                            player.setTimeBack(60);
+                            SDL_Delay(1000);//1s
+                            playerLifeValue--;//player life deduct
+                            continue;
+                        }
+                        else
+                        {
+                            //destroy end quit for now
+                            enemy->free();
+                            close();
+                            SDL_Quit();
+                            return 0;
+                        }
+                    
                 }
 
             }
@@ -262,6 +309,7 @@ int main(int argc, char **argv)
                         bool tCollisition = parentFunction::entityColliseChecking(tRect, bRect);
                         if (tCollisition)//true, destroy bullet
                         {
+                            scoreValue++;//increase score when monster dead
                             //exploi first, when collide
                             for (int i = 0; i < 8; ++i)//run 8 frame
                             {
@@ -280,6 +328,44 @@ int main(int argc, char **argv)
                 }
             }
         }
+        //display game time count
+        std::string time = "Time: ";
+        Uint32 timeValue = SDL_GetTicks() / 1000;
+        Uint32 timeCount = 300 - timeValue;
+        if (timeCount <= 0)
+        {
+            isQuit = true;
+            break;
+        }
+        else
+        {
+            std::string value = std::to_string(timeCount);
+            time += value;
+            gameTimeCount.setText(time);
+            gameTimeCount.loadText(font, screen);
+            gameTimeCount.textRender(screen, screenWidth - 200, 15);//top right corner
+        }
+        std::string score = std::to_string(scoreValue);
+        std::string scoreT("Monster Kill Score: ");
+        scoreT += score;
+        scoreCount.setText(scoreT);
+        scoreCount.loadText(font, screen);
+        scoreCount.textRender(screen, screenWidth*0.5 - 50, 15);//1/2 width -50, 15 y
+
+        int diamondCount = player.getDiamondCount();
+        std::string diamondString = std::to_string(diamondCount);
+        diamondGCount.setText(diamondString);
+        diamondGCount.loadText(font, screen);
+        diamondGCount.textRender(screen, screenWidth*0.5 - 150, 15);//1/2 width -150, 15 y
+
+        std::string life = std::to_string(playerLifeValue);
+        std::string lifeT("Life: ");
+        lifeT += life;
+        playerLife.setText(lifeT);
+        playerLife.loadText(font, screen);
+        playerLife.textRender(screen, 20, 15);//20x, 15 y
+
+
 		SDL_RenderPresent(screen);
 
 		int realTime = fps.getTick();
