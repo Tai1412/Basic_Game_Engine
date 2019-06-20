@@ -51,6 +51,7 @@ typedef struct myMap
 namespace parentFunction//namespace use for check collision for the entity,use for all(bullet kill monster, and monster kill player).
 {
     bool entityColliseChecking(const SDL_Rect& entity1, const SDL_Rect& entity2);//declare
+    int menu(SDL_Renderer* screen, TTF_Font* font);
 }
 typedef struct myInput
 {

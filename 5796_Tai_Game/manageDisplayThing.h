@@ -1,7 +1,6 @@
 #pragma once
 #ifndef MANAGE_DISPLAY_THING_H_
 #define MANAGE_DISPLAY_THING_H_
-#include "parentFunction.h"
 #include "Entity.h"
 //manageDisplayThing such text, playerlife, time count,... relate to display 
 class manageDisplayThing

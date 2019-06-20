@@ -15,6 +15,7 @@ timerFps fps;
 manageExploision enemyExploded;
 manageExploision playerExploded;
 TTF_Font* font=NULL;
+TTF_Font* menuFont = NULL;
 
 bool initData()
 {
@@ -62,6 +63,11 @@ bool initData()
         }
         font = TTF_OpenFont("assets//font//vermin_vibes_1989.ttf",20);//size 12
         if (font == NULL)
+        {
+            success = false;
+        }
+        menuFont = TTF_OpenFont("assets//font//vermin_vibes_1989.ttf", 60);//size 60
+        if (menuFont == NULL)
         {
             success = false;
         }
@@ -215,6 +221,17 @@ int main(int argc, char **argv)
     manageDisplayThing playerLife;//life of character
     playerLife.setColor(manageDisplayThing::textRed);//red
     UINT playerLifeValue = 3;
+    //menu
+    int menu = parentFunction::menu(screen, menuFont);
+    if (menu == 1)
+    {
+        MessageBox(NULL, L"You have 3 life, Just run and kill monster before times up \n Lets Play", L"Guide", MB_OK  | MB_RIGHT) == IDOK;
+    }
+    if (menu == 2)
+    {
+        isQuit = true;
+    }
+       
 	while (!isQuit)
 	{
 		fps.startRun();
